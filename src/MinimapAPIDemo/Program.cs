@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
@@ -10,8 +11,9 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Minimal API demo", Version = "v1" });
 });
+builder.Services.AddMediatR(typeof(MediatRAssembly));
 
-var app = builder.Build();
+    var app = builder.Build();
 app.MapHealthChecks("/health");
 app.MapGraphQL();
 
@@ -24,3 +26,5 @@ app.UseReDoc(reDoc =>
 });
 
 await app.RunAsync();
+
+public class MediatRAssembly { };
