@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using MinimapAPIDemo;
+using Microsoft.AspNetCore.Builder;
 using MinimapAPIDemo.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,6 +8,7 @@ builder.Services.AddHealthChecks();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
+app.MapApi();
 app.MapHealthChecks("/health");
 app.MapInfrastructure();
 

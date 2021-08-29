@@ -1,11 +1,13 @@
 ﻿using MediatR;
 using Microsoft.OpenApi.Models;
+using MinimapAPIDemo.Core.Todos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using MinimapAPIDemo.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MinimapAPIDemo.Infrastructure.Core.Todos;
 
 namespace MinimapAPIDemo.Infrastructure;
 internal static class RegisterExtensions
@@ -14,32 +16,34 @@ internal static class RegisterExtensions
 
     internal static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddGraphQLServer();
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Minimal API demo", Version = "v1" });
-        });
-        services.AddMediatR(typeof(MediatRAssembly));
         services
+            .AddGraphQLServer();
+
+        return services
+            .AddEndpointsApiExplorer()
+            .AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Minimal API demo", Version = "v1" });
+            })
+            .AddMediatR(typeof(RegisterExtensions))
             .AddDbContext<TodoContext>(options =>
             {
                 var connectionString = configuration.GetConnectionString(ConnectionStringName);
                 options.UseNpgsql(connectionString);
-            });
-        return services;
+            })
+            .AddTransient<ITodoRepository, TodoRepository>();
     }
 
     internal static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
     {
-        app.UseSwagger();
-        app.UseReDoc(reDoc =>
-        {
-            reDoc.RoutePrefix = "docs";
-            reDoc.SpecUrl("/swagger/v1/swagger.json");
-            reDoc.DocumentTitle = "Minimal API demo v1";
-        });
-        return app;
+        return app
+            .UseSwagger()
+            .UseReDoc(reDoc =>
+            {
+                reDoc.RoutePrefix = "docs";
+                reDoc.SpecUrl("/swagger/v1/swagger.json");
+                reDoc.DocumentTitle = "Minimal API demo v1";
+            });
     }
 
     internal static IEndpointRouteBuilder MapInfrastructure(this IEndpointRouteBuilder endpoints)
@@ -48,4 +52,3 @@ internal static class RegisterExtensions
         return endpoints;
     }
 }
-public class MediatRAssembly { };
