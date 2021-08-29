@@ -1,14 +1,13 @@
-﻿
-using MediatR;
+﻿using MediatR;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
+using MinimapAPIDemo.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MinimapAPIDemo.Infrastructure;
-
 internal static class RegisterExtensions
 {
     private const string ConnectionStringName = "TodoDatabase";
@@ -49,3 +48,4 @@ internal static class RegisterExtensions
         return endpoints;
     }
 }
+public class MediatRAssembly { };

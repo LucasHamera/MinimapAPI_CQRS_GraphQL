@@ -13,5 +13,3 @@ app.MapInfrastructure();
 app.UseInfrastructure();
 
 await app.RunAsync();
-
-public class MediatRAssembly { };

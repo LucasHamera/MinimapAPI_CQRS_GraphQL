@@ -21,8 +21,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.1.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Application\" />
-  </ItemGroup>
-
 </Project>
