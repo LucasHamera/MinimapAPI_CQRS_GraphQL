@@ -4,6 +4,11 @@ namespace MinimapAPIDemo.Core;
 
 public class Todo
 {
+    private Todo()
+    {
+
+    }
+
     public Todo(Guid id, string text, bool isCompleted)
     {
         Id = id;
@@ -11,9 +16,9 @@ public class Todo
         IsCompleted = isCompleted;
     }
 
-    public Guid Id { get; }
+    public Guid Id { get; private set; }
 
-    public string Text { get;  }
+    public string Text { get; private set; }
 
-    public bool IsCompleted { get; }
+    public bool IsCompleted { get; private set; }
 }
