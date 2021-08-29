@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddMediatR(typeof(MediatRAssembly));
 
-    var app = builder.Build();
+var app = builder.Build();
 app.MapHealthChecks("/health");
 app.MapGraphQL();
 
