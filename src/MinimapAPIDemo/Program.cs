@@ -1,29 +1,16 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
+using MinimapAPIDemo.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHealthChecks();
-builder.Services.AddGraphQLServer();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Minimal API demo", Version = "v1" });
-});
-builder.Services.AddMediatR(typeof(MediatRAssembly));
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 app.MapHealthChecks("/health");
-app.MapGraphQL();
+app.MapInfrastructure();
 
-app.UseSwagger();
-app.UseReDoc(reDoc =>
-{
-    reDoc.RoutePrefix = "docs";
-    reDoc.SpecUrl("/swagger/v1/swagger.json");
-    reDoc.DocumentTitle = "Minimal API demo v1";
-});
+app.UseInfrastructure();
 
 await app.RunAsync();
 

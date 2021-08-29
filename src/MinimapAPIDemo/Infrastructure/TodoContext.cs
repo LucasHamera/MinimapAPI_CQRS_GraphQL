@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MinimapAPIDemo.Core;
+﻿using MinimapAPIDemo.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace MinimapAPIDemo.Infrastructure;
 
