@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using System.Reflection;
 using System.Text;
+using System.Reflection;
 using Microsoft.OpenApi.Models;
 using MinimapAPIDemo.Core.Todos;
 using Microsoft.AspNetCore.Builder;
@@ -10,11 +10,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
+using MinimapAPIDemo.Infrastructure.GraphQL;
 using MinimapAPIDemo.Infrastructure.Pipelines;
 using Microsoft.Extensions.DependencyInjection;
 using MinimapAPIDemo.Infrastructure.Core.Todos;
-using MinimapAPIDemo.Application.Identity.Services;
 using MinimapAPIDemo.Infrastructure.Core.Identity;
+using MinimapAPIDemo.Application.Identity.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace MinimapAPIDemo.Infrastructure;
@@ -26,7 +27,11 @@ internal static class RegisterExtensions
     internal static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services
-            .AddGraphQLServer();
+            .AddGraphQLServer()
+            .AddQueryType<GraphQLQuery>()
+            .AddProjections()
+            .AddFiltering()
+            .AddSorting();
 
         var jwtConfiguration = new JwtConfiguration();
         configuration.GetSection("JWT").Bind(jwtConfiguration);
@@ -84,11 +89,12 @@ internal static class RegisterExtensions
                     }
                 });
             })
-            .AddDbContext<IApiContext, ApiContext>(options =>
+            .AddDbContextFactory<ApiContext>(options =>
             {
                 var connectionString = configuration.GetConnectionString(ConnectionStringName);
                 options.UseNpgsql(connectionString);
             })
+            .AddScoped<IApiContext, ApiContext>()
             .AddTransient<ITodoRepository, TodoRepository>()
             .AddTransient(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkPipelineBehavior<,>));
     }
