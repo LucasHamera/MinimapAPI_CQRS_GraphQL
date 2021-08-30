@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using MinimapAPIDemo.Infrastructure;
+using MinimapAPIDemo.Application.Shared;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MinimapAPIDemo.Infrastructure.Core.Todos;
+using MinimapAPIDemo.Infrastructure.Decorators;
 
 namespace MinimapAPIDemo.Infrastructure;
 internal static class RegisterExtensions
@@ -31,7 +33,8 @@ internal static class RegisterExtensions
                 var connectionString = configuration.GetConnectionString(ConnectionStringName);
                 options.UseNpgsql(connectionString);
             })
-            .AddTransient<ITodoRepository, TodoRepository>();
+            .AddTransient<ITodoRepository, TodoRepository>()
+            .AddTransient(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkPipelineBehavior <,>));
     }
 
     internal static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
