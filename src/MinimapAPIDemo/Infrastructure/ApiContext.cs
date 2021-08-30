@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MinimapAPIDemo.Infrastructure;
 
-public class ApiContext : DbContext
+public class ApiContext : DbContext, IApiContext
 {
     public ApiContext(DbContextOptions<ApiContext> options)
         : base(options)
@@ -16,5 +16,13 @@ public class ApiContext : DbContext
     public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-        => modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+
+        modelBuilder
+            .Entity<User>()
+            // admin admin
+            .HasData(new User("admin", "AQAAAAEAACcQAAAAELibfyhEQ34pzbtFEsXax3A6gkWiF0sHXeZ+EiaPHcLX9yG7eVjoK3+phXvHIyKJhw=="));
+
+    }
 }
