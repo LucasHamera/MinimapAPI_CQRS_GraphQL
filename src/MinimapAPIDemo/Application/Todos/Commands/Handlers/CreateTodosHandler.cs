@@ -3,10 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using MinimapAPIDemo.Core.Todos;
 using MinimapAPIDemo.Application.Shared;
+using MinimapAPIDemo.Application.Todos.Commands;
 
-namespace MinimapAPIDemo.Application.Todos;
+namespace MinimapAPIDemo.Application.Todos.Commands.Handlers;
 
-public class CreateTodosHandler: ICommandHandler<CreateTodo>
+public class CreateTodosHandler : ICommandHandler<CreateTodo>
 {
     private readonly ITodoRepository _todoRepository;
 

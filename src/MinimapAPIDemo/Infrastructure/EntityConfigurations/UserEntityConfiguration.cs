@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MinimapAPIDemo.Infrastructure.EntityConfigurations;
 
-public class UserEntityConfiguration: IEntityTypeConfiguration<User>
+public class UserEntityConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {

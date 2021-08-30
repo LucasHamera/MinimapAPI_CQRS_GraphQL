@@ -5,6 +5,7 @@ using MinimapAPIDemo.Core.Todos;
 using MinimapAPIDemo.Infrastructure;
 
 namespace MinimapAPIDemo.Infrastructure.Core.Todos;
+
 public class TodoRepository : ITodoRepository
 {
     private readonly ApiContext _dbContext;

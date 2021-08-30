@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using MinimapAPIDemo.Infrastructure;
 
-namespace MinimapAPIDemo.Infrastructure.Decorators;
-public class UnitOfWorkPipelineBehavior<TRequest, TResponse> 
+namespace MinimapAPIDemo.Infrastructure.Pipelines;
+
+public class UnitOfWorkPipelineBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     private readonly ApiContext _dbContext;
@@ -12,7 +14,7 @@ public class UnitOfWorkPipelineBehavior<TRequest, TResponse>
     {
         _dbContext = dbContext;
     }
-    
+
     public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
     {
         var response = await next();

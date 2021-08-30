@@ -4,14 +4,13 @@ using MinimapAPIDemo.Core.Todos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
-using MinimapAPIDemo.Infrastructure;
-using MinimapAPIDemo.Application.Shared;
 using Microsoft.Extensions.Configuration;
+using MinimapAPIDemo.Infrastructure.Pipelines;
 using Microsoft.Extensions.DependencyInjection;
 using MinimapAPIDemo.Infrastructure.Core.Todos;
-using MinimapAPIDemo.Infrastructure.Decorators;
 
 namespace MinimapAPIDemo.Infrastructure;
+
 internal static class RegisterExtensions
 {
     private const string ConnectionStringName = "TodoDatabase";
@@ -34,7 +33,7 @@ internal static class RegisterExtensions
                 options.UseNpgsql(connectionString);
             })
             .AddTransient<ITodoRepository, TodoRepository>()
-            .AddTransient(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkPipelineBehavior <,>));
+            .AddTransient(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkPipelineBehavior<,>));
     }
 
     internal static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)

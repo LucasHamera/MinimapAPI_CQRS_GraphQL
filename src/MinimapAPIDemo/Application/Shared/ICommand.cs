@@ -2,6 +2,6 @@
 
 namespace MinimapAPIDemo.Application.Shared;
 
-public interface ICommand: IRequest
+public interface ICommand : IRequest
 {
 }
