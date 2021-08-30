@@ -7,6 +7,7 @@ using MinimapAPIDemo.Application.Identity.Commands;
 using MinimapAPIDemo.Application.Identity.Services;
 
 namespace MinimapAPIDemo.Application.Identity.Commands.Handlers;
+
 public class LoginUserHandler : IRequestHandler<LoginUser, JsonWebTokenDTO>
 {
     private readonly IIdentityService _identityService;
@@ -16,8 +17,8 @@ public class LoginUserHandler : IRequestHandler<LoginUser, JsonWebTokenDTO>
         _identityService = identityService;
     }
 
-    public Task<JsonWebTokenDTO> Handle(LoginUser request, CancellationToken cancellationToken)
+    public async Task<JsonWebTokenDTO> Handle(LoginUser request, CancellationToken cancellationToken)
     {
-        return _identityService.LoginAsync(request, cancellationToken);
+        return await _identityService.LoginAsync(request, cancellationToken);
     }
 }

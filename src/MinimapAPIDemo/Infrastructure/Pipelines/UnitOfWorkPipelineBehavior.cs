@@ -8,9 +8,9 @@ namespace MinimapAPIDemo.Infrastructure.Pipelines;
 public class UnitOfWorkPipelineBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
-    private readonly ApiContext _dbContext;
+    private readonly IApiContext _dbContext;
 
-    public UnitOfWorkPipelineBehavior(ApiContext dbContext)
+    public UnitOfWorkPipelineBehavior(IApiContext dbContext)
     {
         _dbContext = dbContext;
     }

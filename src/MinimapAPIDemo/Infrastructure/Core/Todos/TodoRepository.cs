@@ -8,9 +8,9 @@ namespace MinimapAPIDemo.Infrastructure.Core.Todos;
 
 public class TodoRepository : ITodoRepository
 {
-    private readonly ApiContext _dbContext;
+    private readonly IApiContext _dbContext;
 
-    public TodoRepository(ApiContext dbContext)
+    public TodoRepository(IApiContext dbContext)
     {
         _dbContext = dbContext;
     }
