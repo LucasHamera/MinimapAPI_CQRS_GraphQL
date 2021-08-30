@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System.Reflection;
 using Microsoft.OpenApi.Models;
 using MinimapAPIDemo.Core.Todos;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +27,7 @@ internal static class RegisterExtensions
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Minimal API demo", Version = "v1" });
             })
-            .AddMediatR(typeof(RegisterExtensions))
+            .AddMediatR(Assembly.GetExecutingAssembly())
             .AddDbContext<ApiContext>(options =>
             {
                 var connectionString = configuration.GetConnectionString(ConnectionStringName);
