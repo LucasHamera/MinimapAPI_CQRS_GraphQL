@@ -6,9 +6,9 @@ namespace MinimapAPIDemo.Infrastructure.Decorators;
 public class UnitOfWorkPipelineBehavior<TRequest, TResponse> 
     : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
-    private readonly TodoContext _dbContext;
+    private readonly ApiContext _dbContext;
 
-    public UnitOfWorkPipelineBehavior(TodoContext dbContext)
+    public UnitOfWorkPipelineBehavior(ApiContext dbContext)
     {
         _dbContext = dbContext;
     }

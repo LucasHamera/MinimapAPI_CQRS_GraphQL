@@ -28,7 +28,7 @@ internal static class RegisterExtensions
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Minimal API demo", Version = "v1" });
             })
             .AddMediatR(typeof(RegisterExtensions))
-            .AddDbContext<TodoContext>(options =>
+            .AddDbContext<ApiContext>(options =>
             {
                 var connectionString = configuration.GetConnectionString(ConnectionStringName);
                 options.UseNpgsql(connectionString);

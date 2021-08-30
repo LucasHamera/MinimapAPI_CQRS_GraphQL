@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MinimapAPIDemo.Infrastructure.Migrations
 {
-    [DbContext(typeof(TodoContext))]
+    [DbContext(typeof(ApiContext))]
     partial class TodoContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -19,7 +19,23 @@ namespace MinimapAPIDemo.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "6.0.0-preview.7.21378.4")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("MinimapAPIDemo.Core.Todo", b =>
+            modelBuilder.Entity("MinimapAPIDemo.Core.Identity.User", b =>
+                {
+                    b.Property<string>("Login")
+                        .HasColumnType("text")
+                        .HasColumnName("Login");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Description");
+
+                    b.HasKey("Login");
+
+                    b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("MinimapAPIDemo.Core.Todos.Todo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
