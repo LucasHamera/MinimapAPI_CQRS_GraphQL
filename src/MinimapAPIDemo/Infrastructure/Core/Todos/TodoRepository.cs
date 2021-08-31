@@ -3,6 +3,7 @@ using MinimapAPIDemo.Core;
 using System.Threading.Tasks;
 using MinimapAPIDemo.Core.Todos;
 using MinimapAPIDemo.Infrastructure;
+using MinimapAPIDemo.Infrastructure.Database;
 
 namespace MinimapAPIDemo.Infrastructure.Core.Todos;
 

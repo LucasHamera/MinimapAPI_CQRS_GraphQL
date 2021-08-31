@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MinimapAPIDemo.Infrastructure;
+using MinimapAPIDemo.Infrastructure.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MinimapAPIDemo.Infrastructure.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20210829191048_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210830215931_SeedAdmin")]
+    partial class SeedAdmin
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +22,30 @@ namespace MinimapAPIDemo.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "6.0.0-preview.7.21378.4")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("MinimapAPIDemo.Core.Todo", b =>
+            modelBuilder.Entity("MinimapAPIDemo.Core.Identity.User", b =>
+                {
+                    b.Property<string>("Login")
+                        .HasColumnType("text")
+                        .HasColumnName("Login");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Description");
+
+                    b.HasKey("Login");
+
+                    b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Login = "admin",
+                            Password = "AQAAAAEAACcQAAAAELibfyhEQ34pzbtFEsXax3A6gkWiF0sHXeZ+EiaPHcLX9yG7eVjoK3+phXvHIyKJhw=="
+                        });
+                });
+
+            modelBuilder.Entity("MinimapAPIDemo.Core.Todos.Todo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

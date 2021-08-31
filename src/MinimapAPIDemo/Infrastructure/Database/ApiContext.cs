@@ -2,8 +2,9 @@
 using MinimapAPIDemo.Core.Todos;
 using MinimapAPIDemo.Core.Identity;
 using Microsoft.EntityFrameworkCore;
+using MinimapAPIDemo.Infrastructure.Database;
 
-namespace MinimapAPIDemo.Infrastructure;
+namespace MinimapAPIDemo.Infrastructure.Database;
 
 public class ApiContext : DbContext, IApiContext
 {

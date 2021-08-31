@@ -1,8 +1,8 @@
-﻿using MinimapAPIDemo.Core.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MinimapAPIDemo.Core.Identity;
 
-namespace MinimapAPIDemo.Infrastructure.EntityConfigurations;
+namespace MinimapAPIDemo.Infrastructure.Database.EntityConfigurations;
 
 public class UserEntityConfiguration : IEntityTypeConfiguration<User>
 {

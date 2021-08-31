@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using MinimapAPIDemo.Core.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +9,7 @@ using MinimapAPIDemo.Application.Identity.DTOs;
 using MinimapAPIDemo.Application.Identity.Services;
 using MinimapAPIDemo.Application.Identity.Commands;
 using MinimapAPIDemo.Application.Identity.Exceptions;
+using MinimapAPIDemo.Infrastructure.Database;
 
 namespace MinimapAPIDemo.Infrastructure.Core.Identity;
 

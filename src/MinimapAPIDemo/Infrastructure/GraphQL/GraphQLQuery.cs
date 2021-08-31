@@ -4,6 +4,7 @@ using HotChocolate.Data;
 using MinimapAPIDemo.Core.Todos;
 using MinimapAPIDemo.Core.Identity;
 using HotChocolate.AspNetCore.Authorization;
+using MinimapAPIDemo.Infrastructure.Database;
 
 namespace MinimapAPIDemo.Infrastructure.GraphQL;
 

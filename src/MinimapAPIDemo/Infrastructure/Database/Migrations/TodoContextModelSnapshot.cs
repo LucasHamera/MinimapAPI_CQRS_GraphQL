@@ -2,18 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MinimapAPIDemo.Infrastructure;
+using MinimapAPIDemo.Infrastructure.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MinimapAPIDemo.Infrastructure.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20210830162556_AddedUsersTable")]
-    partial class AddedUsersTable
+    partial class TodoContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,6 +34,13 @@ namespace MinimapAPIDemo.Infrastructure.Migrations
                     b.HasKey("Login");
 
                     b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Login = "admin",
+                            Password = "AQAAAAEAACcQAAAAELibfyhEQ34pzbtFEsXax3A6gkWiF0sHXeZ+EiaPHcLX9yG7eVjoK3+phXvHIyKJhw=="
+                        });
                 });
 
             modelBuilder.Entity("MinimapAPIDemo.Core.Todos.Todo", b =>

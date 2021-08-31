@@ -4,7 +4,7 @@ using MinimapAPIDemo.Core.Todos;
 using MinimapAPIDemo.Core.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace MinimapAPIDemo.Infrastructure;
+namespace MinimapAPIDemo.Infrastructure.Database;
 
 public interface IApiContext
 {
