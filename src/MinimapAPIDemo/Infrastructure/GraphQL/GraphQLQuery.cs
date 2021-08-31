@@ -3,8 +3,10 @@ using HotChocolate;
 using HotChocolate.Data;
 using MinimapAPIDemo.Core.Todos;
 using MinimapAPIDemo.Core.Identity;
+using HotChocolate.AspNetCore.Authorization;
 
 namespace MinimapAPIDemo.Infrastructure.GraphQL;
+
 public class GraphQLQuery
 {
     [UseDbContext(typeof(ApiContext))]

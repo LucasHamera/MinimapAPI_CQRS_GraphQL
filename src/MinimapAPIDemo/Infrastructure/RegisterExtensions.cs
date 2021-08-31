@@ -91,8 +91,10 @@ internal static class RegisterExtensions
             })
             .AddDbContextFactory<ApiContext>(options =>
             {
-                var connectionString = configuration.GetConnectionString(ConnectionStringName);
-                options.UseNpgsql(connectionString);
+                //var connectionString = configuration.GetConnectionString(ConnectionStringName);
+                //options.UseNpgsql(connectionString);
+
+                options.UseInMemoryDatabase(databaseName: "Database");
             })
             .AddScoped<IApiContext, ApiContext>()
             .AddTransient<ITodoRepository, TodoRepository>()
