@@ -50,10 +50,10 @@ internal static class RegisterExtensions
             {
                 opt.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
+                    ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
+                    ValidateIssuer = true,
                     ValidIssuer = jwtConfiguration.Issuer,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.Key))
                 };
@@ -91,10 +91,10 @@ internal static class RegisterExtensions
             })
             .AddDbContextFactory<ApiContext>(options =>
             {
-                //var connectionString = configuration.GetConnectionString(ConnectionStringName);
-                //options.UseNpgsql(connectionString);
+                var connectionString = configuration.GetConnectionString(ConnectionStringName);
+                options.UseNpgsql(connectionString);
 
-                options.UseInMemoryDatabase(databaseName: "Database");
+                //options.UseInMemoryDatabase(databaseName: "Database");
             })
             .AddScoped<IApiContext, ApiContext>()
             .AddTransient<ITodoRepository, TodoRepository>()
