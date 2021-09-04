@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using MinimapAPIDemo.Application.Identity;
 using MinimapAPIDemo.Application.Identity.DTOs;
 using MinimapAPIDemo.Application.Identity.Services;
-using MinimapAPIDemo.Application.Identity.Commands;
 using MinimapAPIDemo.Application.Identity.Exceptions;
+using MinimapAPIDemo.Application.Identity.Queries;
 using MinimapAPIDemo.Infrastructure.Database;
 
 namespace MinimapAPIDemo.Infrastructure.Core.Identity;
@@ -26,7 +26,7 @@ public class IdentityService : IIdentityService
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<JsonWebTokenDTO> LoginAsync(LoginUser request, CancellationToken cancellationToken)
+    public async Task<JsonWebTokenDTO> LoginAsync(GenerateJWT request, CancellationToken cancellationToken)
     {
         var user = await _dbContext
             .Users

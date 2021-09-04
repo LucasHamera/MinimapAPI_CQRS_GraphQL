@@ -16,10 +16,9 @@ public class CreateTodosHandler : ICommandHandler<CreateTodo>
         _todoRepository = todoRepository;
     }
 
-    public async Task<Unit> Handle(CreateTodo request, CancellationToken cancellationToken)
+    public async Task Handle(CreateTodo request, CancellationToken cancellationToken)
     {
         var todo = new Todo(request.Id, request.Text, request.IsCompleted);
         await _todoRepository.AddAsync(todo, cancellationToken);
-        return Unit.Value;
     }
 }
