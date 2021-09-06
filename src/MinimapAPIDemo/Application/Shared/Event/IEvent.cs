@@ -1,5 +1,7 @@
-﻿namespace MinimapAPIDemo.Application.Shared.Event;
+﻿using MediatR;
 
-public interface IEvent
+namespace MinimapAPIDemo.Application.Shared.Event;
+
+public interface IEvent: INotification
 {
 }

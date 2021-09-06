@@ -21,9 +21,9 @@ public static class ApiRegisterExtension
             .MapPost("api/login",
                 [AllowAnonymous]
                 [ProducesResponseType(StatusCodes.Status200OK)]
-                async (IQueryBus commandBus, GenerateJWT command, CancellationToken cancellationToken) =>
+                async (IQueryBus commandBus, GenerateJWT query, CancellationToken cancellationToken) =>
                 {
-                    var jwtToken = await commandBus.Send<GenerateJWT, JsonWebTokenDTO>(command, cancellationToken);
+                    var jwtToken = await commandBus.Send<GenerateJWT, JsonWebTokenDTO>(query, cancellationToken);
                     return Results.Ok(jwtToken);
                 });
 

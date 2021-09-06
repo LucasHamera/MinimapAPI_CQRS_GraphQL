@@ -1,5 +1,7 @@
-﻿namespace MinimapAPIDemo.Application.Shared.Query;
+﻿using MediatR;
 
-public interface IQuery<TResult>
+namespace MinimapAPIDemo.Application.Shared.Query;
+
+public interface IQuery<TResult>: IRequest<TResult>
 {
 }

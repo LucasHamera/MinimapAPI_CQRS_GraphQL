@@ -1,9 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace MinimapAPIDemo.Application.Shared;
 
-public interface ICommandHandler<in TCommand> where TCommand : ICommand
+public interface ICommandHandler<in TCommand>: IRequestHandler<TCommand> where TCommand : ICommand
 {
-    Task Handle(TCommand command, CancellationToken cancellationToken);
 }

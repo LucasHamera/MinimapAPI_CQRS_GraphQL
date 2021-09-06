@@ -1,24 +1,19 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
 using MinimapAPIDemo.Application.Shared.Query;
 
 namespace MinimapAPIDemo.Infrastructure.MediatR;
 
 public class QueryBus: IQueryBus
 {
-    private readonly IServiceProvider _serviceProvider;
+    private readonly IMediator _mediator;
 
-    public QueryBus(IServiceProvider serviceProvider)
+    public QueryBus(IMediator mediator)
     {
-        _serviceProvider = serviceProvider;
+        _mediator = mediator;
     }
 
     public async Task<TResult> Send<TQuery, TResult>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery<TResult>
     {
-        await using var scope = _serviceProvider.CreateAsyncScope();
-        var handler = scope.ServiceProvider.GetRequiredService<IQueryHandler<TQuery, TResult>>();
-        return await handler.Handle(query, cancellationToken);
+        return await _mediator.Send(query, cancellationToken);
     }
 }

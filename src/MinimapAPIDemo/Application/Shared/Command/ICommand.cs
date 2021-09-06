@@ -1,5 +1,7 @@
-﻿namespace MinimapAPIDemo.Application.Shared;
+﻿using MediatR;
 
-public interface ICommand
+namespace MinimapAPIDemo.Application.Shared;
+
+public interface ICommand: IRequest
 {
 }
